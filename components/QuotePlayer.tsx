@@ -31,8 +31,7 @@ export default function MediaControlCard() {
         setQuote(res.data.content)
         setQuoteAuthor(res.data.author)
         // get random image id and set the image
-        let randImageId = getRandomArbitrary(MIN_ID, MAX_ID)
-        console.log(randImageId)
+        const randImageId = getRandomArbitrary(MIN_ID, MAX_ID)
         setImageId(randImageId)
         setQuoteImage('https://picsum.photos/id/' + imageId + '/500')
       })
