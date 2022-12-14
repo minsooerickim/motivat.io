@@ -1,18 +1,35 @@
 import * as React from 'react'
-import { pink } from '@mui/material/colors'
 import Checkbox from '@mui/material/Checkbox'
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+export default function ControlledCheckbox() {
+  const [emailChecked, setEmailChecked] = React.useState(true)
+  const [textChecked, setTextChecked] = React.useState(true)
 
-export default function ColorCheckboxes() {
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmailChecked(event.target.checked)
+  }
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTextChecked(event.target.checked)
+  }
+
   return (
     <div className="flex justify-center">
       <span className="flex justify-center items-center">
-        <Checkbox {...label} defaultChecked />
+        <Checkbox
+          checked={emailChecked}
+          onChange={handleEmailChange}
+          inputProps={{ 'aria-label': 'controlled' }}
+          color="success"
+        />
         <p className="inline pr-3">email</p>
       </span>
       <span className="flex justify-center items-center">
-        <Checkbox {...label} defaultChecked color="success" />
+        <Checkbox
+          checked={textChecked}
+          onChange={handleTextChange}
+          inputProps={{ 'aria-label': 'controlled' }}
+          color="success"
+        />
         <p className="inline pr-3">text</p>
       </span>
     </div>
