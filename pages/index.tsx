@@ -1,7 +1,10 @@
 import React from "react"
+import SliderComponent from "@/components/SliderComponent"
 
 export default function Home() {
   return (
-    <h1 className="text-red-400">test</h1>
+    <div className=" py-4">
+      <SliderComponent />
+    </div>
   )
 }
