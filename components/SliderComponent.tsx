@@ -10,13 +10,33 @@ export default function DiscreteSliderSteps() {
   return (
     <Box sx={{ width: 300 }}>
       <Slider
-        aria-label="Small steps"
-        defaultValue={0.00000005}
+        aria-label="hours"
+        defaultValue={1}
         getAriaValueText={valuetext}
-        step={0.00000001}
+        step={1}
         marks
-        min={-0.00000005}
-        max={0.0000001}
+        min={1}
+        max={48}
+        valueLabelDisplay="auto"
+      />
+      <Slider
+        aria-label="days"
+        defaultValue={1}
+        getAriaValueText={valuetext}
+        step={1}
+        marks
+        min={1}
+        max={60}
+        valueLabelDisplay="auto"
+      />
+      <Slider
+        aria-label="months"
+        defaultValue={1}
+        getAriaValueText={valuetext}
+        step={1}
+        marks
+        min={1}
+        max={24}
         valueLabelDisplay="auto"
       />
     </Box>
