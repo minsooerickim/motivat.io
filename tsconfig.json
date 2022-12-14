@@ -18,7 +18,8 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/pages/*": ["pages/*"],
-      "@/lib/*": ["lib/*"]
+      "@/lib/*": ["lib/*"],
+      "@/utility/*": ["utility/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/mongodb.js"],

@@ -8,7 +8,9 @@ export default function Home() {
   return (
     <Page title="Home">
       <Header />
-      <QuotePlayer />
+      <span className='px-4'>
+        <QuotePlayer />
+      </span>
       <SliderComponent />
     </Page>
   )
