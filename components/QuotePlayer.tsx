@@ -18,7 +18,7 @@ export default function MediaControlCard() {
   const [imageId, setImageId] = React.useState(0)
   const [quote, setQuote] = React.useState('')
   const [quoteAuthor, setQuoteAuthor] = React.useState('')
-  
+
   const MIN_ID = 0
   const MAX_ID = 1000
 
@@ -39,14 +39,14 @@ export default function MediaControlCard() {
   }
 
   const playQuote = () => {
-    var msg = new SpeechSynthesisUtterance();
-    
+    var msg = new SpeechSynthesisUtterance()
+
     // different languages
     // var voices = window.speechSynthesis.getVoices();
-    // msg.voice = voices[2]; 
+    // msg.voice = voices[2];
 
     msg.text = quote + ' by ' + quoteAuthor
-    window.speechSynthesis.speak(msg);
+    window.speechSynthesis.speak(msg)
   }
 
   React.useEffect(() => {
@@ -71,11 +71,11 @@ export default function MediaControlCard() {
         <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
           <IconButton aria-label="previous">
             {theme.direction === 'rtl' ? (
-              <span className='-mt-1' onClick={() => getQuote()}>
+              <span className="-mt-1" onClick={() => getQuote()}>
                 <SkipNextIcon />
               </span>
             ) : (
-              <span className='-mt-1'onClick={() => getQuote()}>
+              <span className="-mt-1" onClick={() => getQuote()}>
                 <SkipPreviousIcon />
               </span>
             )}
@@ -87,22 +87,18 @@ export default function MediaControlCard() {
           </span>
           <IconButton aria-label="next">
             {theme.direction === 'rtl' ? (
-              <span className='-mt-1' onClick={() => getQuote()}>
+              <span className="-mt-1" onClick={() => getQuote()}>
                 <SkipPreviousIcon />
               </span>
             ) : (
-              <span className='-mt-1' onClick={() => getQuote()}>
+              <span className="-mt-1" onClick={() => getQuote()}>
                 <SkipNextIcon />
               </span>
             )}
           </IconButton>
         </Box>
       </Box>
-      <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        src={quoteImage}
-      />
+      <CardMedia component="img" sx={{ width: 151 }} src={quoteImage} />
     </Card>
   )
 }
