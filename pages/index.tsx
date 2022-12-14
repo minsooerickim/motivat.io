@@ -3,6 +3,7 @@ import SliderComponent from '@/components/SliderComponent'
 import { Page } from '@/components/Page/Page'
 import QuotePlayer from '@/components/QuotePlayer'
 import Header from '@/components/Header'
+import Subscription from '@/sections/Subscription'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <span className="px-4">
         <QuotePlayer />
       </span>
+      <Subscription />
       <SliderComponent />
     </Page>
   )
