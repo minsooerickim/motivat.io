@@ -27,7 +27,6 @@ export default function MediaControlCard() {
     axios
       .get('http://api.quotable.io/random?maxLength=40')
       .then(function (res) {
-        console.log(res.data)
         setQuote(res.data.content)
         setQuoteAuthor(res.data.author)
         // get random image id and set the image
