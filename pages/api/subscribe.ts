@@ -19,19 +19,19 @@ export default async function manualReviewApplication(
       return res.status(422).json({ msg: 'invalid email address! ;('})
     }
 
-    // const user = await prisma.user.create({
-    //   data: {
-    //     email: email as string,
-    //     phone: phone as string,
-    //     subscription: { 
-    //       connect: [
-    //         { subscriptionId: 'email' },
-    //         { subscriptionId: 'phone' },
-    //       ] 
-    //     },
-    //   }
-    // })
-    // return res.status(200).json({ user })
+    const user = await prisma.user.create({
+      data: {
+        email: email as string,
+        phone: phone as string,
+        subscriptions: { 
+          connect: [
+            { subscriptionId: 'email' },
+            { subscriptionId: 'phone' },
+          ] 
+        },
+      }
+    })
+    return res.status(200).json({ user })
   }
 
   // if just email
@@ -43,7 +43,7 @@ export default async function manualReviewApplication(
     const user = await prisma.user.create({
       data: {
         email: req.body.email as string,
-        subscription: { connect: { subscriptionId: 'email' } },
+        subscriptions: { connect: { subscriptionId: 'email' } },
       }
     })
     return res.status(200).json({ user })
@@ -55,7 +55,7 @@ export default async function manualReviewApplication(
     const user = await prisma.user.create({
       data: {
         phone: req.body.phone as string,
-        subscription: { connect: { subscriptionId: 'phone' } },
+        subscriptions: { connect: { subscriptionId: 'phone' } },
       }
     })
     return res.status(200).json({ user })
