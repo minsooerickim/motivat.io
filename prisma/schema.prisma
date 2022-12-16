@@ -9,11 +9,18 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// many to many relationship
+model Subscription {
+  subscriptionId    String  @id @default("email")
+  users User[]
+}
 model User {
-  id            String       @default(cuid()) @id
-  name          String?
-  email         String?   @unique
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  @@map(name: "users")
+  id                String        @default(cuid()) @id
+  email             String?       @unique
+  phone             String?       @unique
+  subscribedAt      DateTime      @default(now()) @map(name: "subscribed_at")
+  subscription      Subscription  @relation(fields: [subscriptionType], references: [subscriptionId])
+  subscriptionType  String        
+  // add a subscription interval data field
 }

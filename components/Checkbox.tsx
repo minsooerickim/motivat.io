@@ -4,12 +4,13 @@ import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import axios from 'axios'
 import { Box, TextField } from '@mui/material'
+import { toast } from 'react-hot-toast'
 
 export default function ControlledCheckbox() {
   const [emailChecked, setEmailChecked] = React.useState(true)
   const [textChecked, setTextChecked] = React.useState(true)
   const [email, setEmail] = React.useState('')
-  const [phoneNum, setPhoneNum] = React.useState('')
+  const [phone, setPhone] = React.useState('')
 
   // handling checkboxes
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,21 +23,58 @@ export default function ControlledCheckbox() {
   const handleChangeEmail = (e) => {
     setEmail(e.target.value)
   }
-  const handleChangePhoneNum = (e) => {
-    setPhoneNum(e.target.value)
+  const handleChangePhone = (e) => {
+    setPhone(e.target.value)
   }
   // handling when user clicks subscribe
   // TODO: add input validation (yup?)
   const handleSubscribe = () => {
-    // TODO: 
-    // if (emailChecked) {
-    //     axios
-    //       .post('/api/sendQuote',)
-    // }
+    // TODO:
+    if (emailChecked && textChecked) {
+      axios
+        .post('/api/subscribe', { email, phone })
+        .then(() => {
+          toast.success('Successfully subscribed!', {
+            id: 'appReminderSuccess',
+          })
+        })
+        .catch(() => {
+          toast.error('Uh oh. Something went wrong...', {
+            id: 'appReminderError',
+          })
+        })
+    }
+    else if (emailChecked) {
+      axios
+        .post('/api/subscribe', { email })
+        .then(() => {
+          toast.success('Successfully subscribed!', {
+            id: 'appReminderSuccess',
+          })
+        })
+        .catch(() => {
+          toast.error('Uh oh. Something went wrong...', {
+            id: 'appReminderError',
+          })
+        })
+    } else {
+      axios
+        .post('/api/subscribe', { phone })
+        .then(() => {
+          toast.success('Successfully subscribed!', {
+            id: 'appReminderSuccess',
+          })
+        })
+        .catch(() => {
+          toast.error('Uh oh. Something went wrong...', {
+            id: 'appReminderError',
+          })
+        })
+    }
     console.log('email: ' + email)
-    console.log('text: ' + phoneNum)
+    console.log('text: ' + phone)
   }
-  
+
   return (
     <div className="flex flex-col items-center">
       <div className="flex justify-center">
@@ -69,7 +107,12 @@ export default function ControlledCheckbox() {
           noValidate
           autoComplete="off"
         >
-          <TextField id="outlined-basic" label="Email" variant="outlined" onChange={handleChangeEmail} />
+          <TextField
+            id="outlined-basic"
+            label="Email"
+            variant="outlined"
+            onChange={handleChangeEmail}
+          />
         </Box>
       )}
       {textChecked && (
@@ -85,7 +128,7 @@ export default function ControlledCheckbox() {
             id="outlined-basic"
             label="Phone Number"
             variant="outlined"
-            onChange={handleChangePhoneNum}
+            onChange={handleChangePhone}
           />
         </Box>
       )}
