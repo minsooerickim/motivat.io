@@ -43,8 +43,7 @@ export default function ControlledCheckbox() {
             id: 'appReminderError',
           })
         })
-    }
-    else if (emailChecked) {
+    } else if (emailChecked) {
       axios
         .post('/api/subscribe', { email })
         .then(() => {
