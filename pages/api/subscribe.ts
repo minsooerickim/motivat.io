@@ -16,20 +16,17 @@ export default async function manualReviewApplication(
     // input validation
     // TODO: validate phone as well
     if (!validateEmail(email)) {
-      return res.status(422).json({ msg: 'invalid email address! ;('})
+      return res.status(422).json({ msg: 'invalid email address! ;(' })
     }
 
     const user = await prisma.user.create({
       data: {
         email: email as string,
         phone: phone as string,
-        subscriptions: { 
-          connect: [
-            { subscriptionId: 'email' },
-            { subscriptionId: 'phone' },
-          ] 
+        subscriptions: {
+          connect: [{ subscriptionId: 'email' }, { subscriptionId: 'phone' }],
         },
-      }
+      },
     })
     return res.status(200).json({ user })
   }
@@ -38,13 +35,13 @@ export default async function manualReviewApplication(
   if (req.body.hasOwnProperty('email')) {
     // TODO: make input box red somehow
     if (!validateEmail(req.body.email)) {
-      return res.status(422).json({ msg: 'invalid email address! ;('})
+      return res.status(422).json({ msg: 'invalid email address! ;(' })
     }
     const user = await prisma.user.create({
       data: {
         email: req.body.email as string,
         subscriptions: { connect: { subscriptionId: 'email' } },
-      }
+      },
     })
     return res.status(200).json({ user })
   }
@@ -56,9 +53,8 @@ export default async function manualReviewApplication(
       data: {
         phone: req.body.phone as string,
         subscriptions: { connect: { subscriptionId: 'phone' } },
-      }
+      },
     })
     return res.status(200).json({ user })
   }
-
 }

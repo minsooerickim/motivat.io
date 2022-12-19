@@ -13,7 +13,7 @@ export default function Home() {
         <QuotePlayer />
       </span>
       <Subscription />
-      <SliderComponent />
+      {/* <SliderComponent /> */}
     </Page>
   )
 }
