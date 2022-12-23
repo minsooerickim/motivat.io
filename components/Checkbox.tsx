@@ -34,9 +34,7 @@ export default function ControlledCheckbox() {
       axios
         .post('/api/subscribe', { email, phone })
         .then(() => {
-          toast.success('Successfully subscribed!', {
-            id: 'appReminderSuccess',
-          })
+          toast.success('Successfully subscribed!')
         })
         .catch(() => {
           toast.error('Uh oh. Something went wrong...', {
@@ -47,9 +45,7 @@ export default function ControlledCheckbox() {
       axios
         .post('/api/subscribe', { email })
         .then(() => {
-          toast.success('Successfully subscribed!', {
-            id: 'appReminderSuccess',
-          })
+          toast.success('Successfully subscribed!')
         })
         .catch(() => {
           toast.error('Uh oh. Something went wrong...', {
@@ -60,9 +56,7 @@ export default function ControlledCheckbox() {
       axios
         .post('/api/subscribe', { phone })
         .then(() => {
-          toast.success('Successfully subscribed!', {
-            id: 'appReminderSuccess',
-          })
+          toast.success('Successfully subscribed!')
         })
         .catch(() => {
           toast.error('Uh oh. Something went wrong...', {
@@ -70,8 +64,6 @@ export default function ControlledCheckbox() {
           })
         })
     }
-    console.log('email: ' + email)
-    console.log('text: ' + phone)
   }
 
   return (

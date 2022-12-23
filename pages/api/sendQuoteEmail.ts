@@ -9,7 +9,7 @@ export default async function manualReviewApplication(
 ) {
   const sgMail = require('@sendgrid/mail')
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-  
+
   const prisma = new PrismaClient()
 
   const emailSubscribers = await prisma.subscription.findUnique({
