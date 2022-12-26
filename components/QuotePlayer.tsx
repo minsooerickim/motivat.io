@@ -22,10 +22,17 @@ export default function MediaControlCard() {
   const MIN_ID = 0
   const MAX_ID = 1000
 
+  const get_config = {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    }
+  }
+  
   // GETs the quote and sets the according properties
   const getQuote = () => {
     axios
-      .get('http://api.quotable.io/random?maxLength=40')
+      .get('http://api.quotable.io/random?maxLength=40', get_config)
       .then(function (res) {
         setQuote(res.data.content)
         setQuoteAuthor(res.data.author)
