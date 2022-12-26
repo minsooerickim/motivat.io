@@ -11,7 +11,7 @@ export function Page({ children, title }: Props) {
   return (
     <Layout>
       <Head>
-        <title>{title && '| ' + title}</title>
+        <title>{title}</title>
       </Head>
       <section className="flex flex-col w-full justify-center items-center">
         {children}

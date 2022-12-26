@@ -74,13 +74,13 @@ export default function MediaControlCard() {
           </Typography>
         </CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-          <IconButton aria-label="previous">
+          <IconButton aria-label="previous" onClick={() => getQuote()}>
             {theme.direction === 'rtl' ? (
-              <span className="-mt-1" onClick={() => getQuote()}>
+              <span className="-mt-1">
                 <SkipNextIcon />
               </span>
             ) : (
-              <span className="-mt-1" onClick={() => getQuote()}>
+              <span className="-mt-1">
                 <SkipPreviousIcon />
               </span>
             )}
@@ -90,13 +90,13 @@ export default function MediaControlCard() {
               <PlayArrowIcon sx={{ height: 38, width: 38 }} />
             </IconButton>
           </span>
-          <IconButton aria-label="next">
+          <IconButton aria-label="next" onClick={() => getQuote()}>
             {theme.direction === 'rtl' ? (
-              <span className="-mt-1" onClick={() => getQuote()}>
+              <span className="-mt-1">
                 <SkipPreviousIcon />
               </span>
             ) : (
-              <span className="-mt-1" onClick={() => getQuote()}>
+              <span className="-mt-1">
                 <SkipNextIcon />
               </span>
             )}
