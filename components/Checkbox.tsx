@@ -26,6 +26,7 @@ export default function ControlledCheckbox() {
   const handleChangePhone = (e) => {
     setPhone(e.target.value)
   }
+
   // handling when user clicks subscribe
   // TODO: add input validation (yup?)
   const handleSubscribe = () => {
@@ -66,6 +67,28 @@ export default function ControlledCheckbox() {
     }
   }
 
+  // https://smartdevpreneur.com/the-complete-guide-to-mui-button-color/
+  const styles = {
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'green',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'green',
+      },
+      '&:hover fieldset': {
+        borderColor: 'green',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'green',
+      },
+      color: 'white'
+    },
+    '& .MuiFormLabel-root': {
+      color: 'green'
+    }
+  }
+
   return (
     <div className="flex flex-col items-center">
       <div className="flex justify-center">
@@ -102,7 +125,9 @@ export default function ControlledCheckbox() {
             id="outlined-basic"
             label="Email"
             variant="outlined"
+            color="success"
             onChange={handleChangeEmail}
+            sx={styles}
           />
         </Box>
       )}
@@ -111,22 +136,37 @@ export default function ControlledCheckbox() {
           component="form"
           sx={{
             '& > :not(style)': { m: 1, width: '25ch' },
+            borderColor: 'success',
           }}
           noValidate
           autoComplete="off"
+          borderColor="success"
         >
           <TextField
             id="outlined-basic"
             label="Phone Number"
             variant="outlined"
+            color="success"
             onChange={handleChangePhone}
+            sx={styles}
+            // sx={{ input: { color: 'common.white' } }}
           />
         </Box>
       )}
       {(emailChecked || textChecked) && (
         <div className="pt-2">
           <Stack spacing={2} direction="row">
-            <Button variant="outlined" onClick={handleSubscribe}>
+            <Button
+              variant="outlined"
+              onClick={handleSubscribe}
+              color="success"
+              sx={{
+                color: 'success.main',
+                '&.MuiButton-root': {
+                  border: '2px success.main',
+                },
+              }}
+            >
               Subscribe
             </Button>
           </Stack>

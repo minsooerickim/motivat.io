@@ -1,4 +1,4 @@
-import { ThemeButton } from "./ThemeButton";
+import { ThemeButton } from './ThemeButton'
 import { TITLE } from '@/utility/index'
 
 export default function Header() {

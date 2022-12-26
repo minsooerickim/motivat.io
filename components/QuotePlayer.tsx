@@ -26,7 +26,7 @@ export default function MediaControlCard() {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
-    }
+    },
   }
 
   // GETs the quote and sets the according properties
@@ -60,7 +60,13 @@ export default function MediaControlCard() {
 
   return (
     <Card sx={{ display: 'flex' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          bgcolor: 'success.main',
+        }}
+      >
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5">
             {quote}
