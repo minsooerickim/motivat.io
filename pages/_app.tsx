@@ -7,7 +7,7 @@ import '../styles/globals.css'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <ThemeProvider>
+    <ThemeProvider forcedTheme='dark'>
       <Toaster />
       <Component {...pageProps} />
     </ThemeProvider>
