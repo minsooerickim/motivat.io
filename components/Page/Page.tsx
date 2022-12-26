@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { Layout } from '@/components/Page/Layout'
-
 interface Props {
   /** Content of the page. */
   children: React.ReactNode | React.ReactNode[]
@@ -12,7 +11,7 @@ export function Page({ children, title }: Props) {
   return (
     <Layout>
       <Head>
-        <title>Motivat.io {title && '| ' + title}</title>
+        <title>{title && '| ' + title}</title>
       </Head>
       <section className="flex flex-col w-full justify-center items-center">
         {children}

@@ -1,10 +1,10 @@
 import { ThemeButton } from "./ThemeButton";
+import { TITLE } from '@/utility/index'
 
 export default function Header() {
-  const title = "Motivat.io"
   return (
     <div className="py-4">
-      <h1 className="text-3xl">{title}</h1>
+      <h1 className="text-3xl">{TITLE}</h1>
       <ThemeButton/>
     </div>
   )
