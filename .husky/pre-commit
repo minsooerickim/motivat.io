@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # If using npm, remove above and uncomment below
-npm run lint-staged
+npm run pre-commit
