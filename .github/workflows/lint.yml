@@ -1,0 +1,12 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install prettier
+        run: yarn add prettier
+      - name: Run prettier
+        run: yarn prettier --config .prettierrc.json  --check "components/**/*.{js,jsx,ts,tsx}" "pages/**/*.{js,jsx,ts,tsx}"
