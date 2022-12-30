@@ -1,16 +1,19 @@
 import * as React from 'react'
 import Checkbox from '@mui/material/Checkbox'
-import Stack from '@mui/material/Stack'
-import Button from '@mui/material/Button'
 import axios from 'axios'
-import { Box, TextField } from '@mui/material'
 import { toast } from 'react-hot-toast'
+import Button from '@/components/Buttons/Button'
+import LoadingButton from '@/components/Buttons/LoadingButton'
+import ErrorButton from './Buttons/ErrorButton'
 
 export default function ControlledCheckbox() {
   const [emailChecked, setEmailChecked] = React.useState(true)
   const [textChecked, setTextChecked] = React.useState(true)
   const [email, setEmail] = React.useState('')
   const [phone, setPhone] = React.useState('')
+  const [subscribeButtonClicked, setSubscribeButtonClicked] =
+    React.useState(false)
+  const [error, setError] = React.useState(false)
 
   // handling checkboxes
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +22,7 @@ export default function ControlledCheckbox() {
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTextChecked(event.target.checked)
   }
+
   // handling input changes for email and phone
   const handleChangeEmail = (e) => {
     setEmail(e.target.value)
@@ -30,62 +34,47 @@ export default function ControlledCheckbox() {
   // handling when user clicks subscribe
   // TODO: add input validation (yup?)
   const handleSubscribe = () => {
+    setSubscribeButtonClicked(!subscribeButtonClicked)
     // TODO:
     if (emailChecked && textChecked) {
       axios
         .post('/api/subscribe', { email, phone })
         .then(() => {
           toast.success('Successfully subscribed!')
+          setSubscribeButtonClicked(!subscribeButtonClicked)
         })
         .catch(() => {
           toast.error('Uh oh. Something went wrong...', {
             id: 'appReminderError',
           })
+          setError(true)
         })
     } else if (emailChecked) {
       axios
         .post('/api/subscribe', { email })
         .then(() => {
           toast.success('Successfully subscribed!')
+          setSubscribeButtonClicked(!subscribeButtonClicked)
         })
         .catch(() => {
           toast.error('Uh oh. Something went wrong...', {
             id: 'appReminderError',
           })
+          setError(true)
         })
     } else {
       axios
         .post('/api/subscribe', { phone })
         .then(() => {
           toast.success('Successfully subscribed!')
+          setSubscribeButtonClicked(!subscribeButtonClicked)
         })
         .catch(() => {
           toast.error('Uh oh. Something went wrong...', {
             id: 'appReminderError',
           })
+          setError(true)
         })
-    }
-  }
-
-  // https://smartdevpreneur.com/the-complete-guide-to-mui-button-color/
-  const styles = {
-    '& .MuiInput-underline:after': {
-      borderBottomColor: 'green',
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'green',
-      },
-      '&:hover fieldset': {
-        borderColor: 'green',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: 'green',
-      },
-      color: 'white'
-    },
-    '& .MuiFormLabel-root': {
-      color: 'green'
     }
   }
 
@@ -113,65 +102,42 @@ export default function ControlledCheckbox() {
       </div>
 
       {emailChecked && (
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            color="success"
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">What is your email?</span>
+          </label>
+          <input
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered w-full max-w-xs"
             onChange={handleChangeEmail}
-            sx={styles}
           />
-        </Box>
-      )}
-      {textChecked && (
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-            borderColor: 'success',
-          }}
-          noValidate
-          autoComplete="off"
-          borderColor="success"
-        >
-          <TextField
-            id="outlined-basic"
-            label="Phone Number"
-            variant="outlined"
-            color="success"
-            onChange={handleChangePhone}
-            sx={styles}
-            // sx={{ input: { color: 'common.white' } }}
-          />
-        </Box>
-      )}
-      {(emailChecked || textChecked) && (
-        <div className="pt-2">
-          <Stack spacing={2} direction="row">
-            <Button
-              variant="outlined"
-              onClick={handleSubscribe}
-              color="success"
-              sx={{
-                color: 'success.main',
-                '&.MuiButton-root': {
-                  border: '2px success.main',
-                },
-              }}
-            >
-              Subscribe
-            </Button>
-          </Stack>
         </div>
       )}
+
+      {textChecked && (
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">What is your phone number?</span>
+          </label>
+          <input
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered w-full max-w-xs"
+            onChange={handleChangePhone}
+          />
+        </div>
+      )}
+
+      <span className="py-4">
+        {(emailChecked || textChecked) && !subscribeButtonClicked && !error && (
+          <Button text={'Subscribe'} handler={handleSubscribe} />
+        )}
+        {subscribeButtonClicked && !error && (
+          <LoadingButton text={'Subscribing'} />
+        )}
+        {error && <ErrorButton text={'Something went wrong :('} />}
+      </span>
     </div>
   )
 }
