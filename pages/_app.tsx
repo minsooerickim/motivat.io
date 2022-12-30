@@ -1,3 +1,4 @@
+import Footer from '@/sections/Footer'
 import { AppProps } from 'next/app'
 import { Toaster } from 'react-hot-toast'
 import { ThemeProvider } from 'next-themes'
@@ -10,6 +11,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     <ThemeProvider forcedTheme="dark">
       <Toaster />
       <Component {...pageProps} />
+      <Footer />
     </ThemeProvider>
   )
 }
