@@ -5,11 +5,13 @@ import { ThemeProvider } from 'next-themes'
 
 import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
+import Navbar from '@/components/Navbar'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider forcedTheme="dark">
       <Toaster />
+      <Navbar />
       <Component {...pageProps} />
       <Footer />
     </ThemeProvider>

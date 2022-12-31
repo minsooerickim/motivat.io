@@ -8,18 +8,18 @@
     --background: white;
     --foreground: black;
     --text: black;
-    --sub-text: #36454F;
+    --sub-text: #36454f;
   }
   [data-theme='light'] {
     --background: white;
     --foreground: black;
     --text: black;
-    --sub-text: #36454F;
+    --sub-text: #36454f;
   }
   [data-theme='dark'] {
     --background: black;
     --foreground: white;
     --text: white;
-    --sub-text: red ;
+    --sub-text: red;
   }
 }
