@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Checkbox from '@mui/material/Checkbox'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 import Button from '@/components/Buttons/Button'
@@ -7,8 +6,8 @@ import LoadingButton from '@/components/Buttons/LoadingButton'
 import ErrorButton from './Buttons/ErrorButton'
 
 export default function ControlledCheckbox() {
-  const [emailChecked, setEmailChecked] = React.useState(true)
-  const [textChecked, setTextChecked] = React.useState(true)
+  const [emailChecked, setEmailChecked] = React.useState(false)
+  const [textChecked, setTextChecked] = React.useState(false)
   const [email, setEmail] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [subscribeButtonClicked, setSubscribeButtonClicked] =
@@ -16,10 +15,14 @@ export default function ControlledCheckbox() {
   const [error, setError] = React.useState(false)
 
   // handling checkboxes
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailCheckChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setEmailChecked(event.target.checked)
   }
-  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTextCheckChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setTextChecked(event.target.checked)
   }
 
@@ -81,24 +84,29 @@ export default function ControlledCheckbox() {
   return (
     <div className="flex flex-col items-center">
       <div className="flex justify-center">
-        <span className="flex justify-center items-center">
-          <Checkbox
-            checked={emailChecked}
-            onChange={handleEmailChange}
-            inputProps={{ 'aria-label': 'controlled' }}
-            color="success"
-          />
-          <p className="inline pr-3">email</p>
-        </span>
-        <span className="flex justify-center items-center">
-          <Checkbox
-            checked={textChecked}
-            onChange={handleTextChange}
-            inputProps={{ 'aria-label': 'controlled' }}
-            color="success"
-          />
-          <p className="inline pr-3">text</p>
-        </span>
+        <div className="form-control">
+          <label className="cursor-pointer label">
+            <span className="label-text pr-2">Email</span>
+            <input
+              type="checkbox"
+              // checked
+              className="checkbox checkbox-accent"
+              onChange={handleEmailCheckChange}
+            />
+          </label>
+        </div>
+
+        <div className="form-control">
+          <label className="cursor-pointer label">
+            <span className="label-text pr-2">Phone</span>
+            <input
+              type="checkbox"
+              // checked
+              className="checkbox checkbox-accent"
+              onChange={handleTextCheckChange}
+            />
+          </label>
+        </div>
       </div>
 
       {emailChecked && (
@@ -129,7 +137,7 @@ export default function ControlledCheckbox() {
         </div>
       )}
 
-      <span className="py-4">
+      <span className="pt-4">
         {(emailChecked || textChecked) && !subscribeButtonClicked && !error && (
           <Button text={'Subscribe'} handler={handleSubscribe} />
         )}
