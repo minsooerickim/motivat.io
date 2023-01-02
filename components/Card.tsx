@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion'
 import * as React from 'react'
 import { RxSpeakerLoud } from 'react-icons/rx'
-import { BsHeart, BsSave } from 'react-icons/bs'
+import { BsHeart, BsSave, BsSaveFill } from 'react-icons/bs'
 import { GET_CONFIG } from '@/utility/const'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 
 export default function Card() {
   const [quote, setQuote] = React.useState('')
   const [quoteAuthor, setQuoteAuthor] = React.useState('')
   const [quoteTag, setQuoteTag] = React.useState('')
+  const [saved, setSaved] = React.useState(false)
 
   // GETs the quote and sets the according properties
   const getQuote = async () => {
@@ -33,6 +35,18 @@ export default function Card() {
 
     msg.text = quote + ' by ' + quoteAuthor
     window.speechSynthesis.speak(msg)
+  }
+
+  const toggleSaveQuote = () => {
+    setSaved(!saved)
+    axios
+      .post('/api/toggleSaved', { saved })
+      .then(() => {
+        toast.success('Successfully subscribed!')
+      })
+      .catch(() => {
+        toast.error('Uh oh. Something went wrong...')
+      })
   }
 
   // get quote on page load
@@ -77,14 +91,25 @@ export default function Card() {
             >
               <BsHeart />
             </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.995 }}
-              className="flex flex-col justify-center items-center cursor-pointer"
-              onClick={() => playQuote()}
-            >
-              <BsSave />
-            </motion.button>
+            {saved ? (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.995 }}
+                className="flex flex-col justify-center items-center cursor-pointer"
+                onClick={() => toggleSaveQuote()}
+              >
+                <BsSaveFill />
+              </motion.button>
+            ) : (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.995 }}
+                className="flex flex-col justify-center items-center cursor-pointer"
+                onClick={() => toggleSaveQuote()}
+              >
+                <BsSave />
+              </motion.button>
+            )}
           </div>
         </div>
       </div>
