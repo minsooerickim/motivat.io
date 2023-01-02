@@ -1,12 +1,13 @@
+/* eslint-disable no-console */
 import { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient } from '@prisma/client'
 import { validateEmail } from '@/utility/methods'
-import axios from 'axios'
 
 export default async function manualReviewApplication(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const sgMail = require('@sendgrid/mail')
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
   const prisma = new PrismaClient()
@@ -62,7 +63,7 @@ export default async function manualReviewApplication(
       () => {
         return res.status(200).json({ user })
       },
-      (error: { response: { body: any } }) => {
+      (error: { response: { body: unknown } }) => {
         console.error(error)
         if (error.response) {
           console.error(error.response.body)
