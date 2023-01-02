@@ -23,3 +23,11 @@ model User {
   subscriptions     Subscription[]
   // TODO: add a subscription interval data field
 }
+
+model Quote {
+  id            String      @default(cuid()) @id
+  quote         String      @unique
+  quoteAuthor   String?
+  quoteTag      String?
+  registeredAt  DateTime    @default(now()) @map(name: "registered_at")
+}
