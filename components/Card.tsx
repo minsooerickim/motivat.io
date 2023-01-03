@@ -11,14 +11,17 @@ export default function Card() {
   const [quoteTag, setQuoteTag] = React.useState('')
 
   // GETs the quote and sets the according properties
-  const getQuote = () => {
-    axios
+  const getQuote = async () => {
+    await axios
       .get('https://api.quotable.io/random?maxLength=200', GET_CONFIG)
       .then(function (res) {
         setQuote(res.data.content)
         setQuoteAuthor(res.data.author)
         setQuoteTag(res.data.tags[0])
       })
+  }
+  const registerQuote = async () => {
+    await axios.post('/api/registerQuote', { quote, quoteAuthor, quoteTag })
   }
 
   const playQuote = () => {
@@ -36,6 +39,12 @@ export default function Card() {
   React.useEffect(() => {
     getQuote()
   }, [])
+
+  React.useEffect(() => {
+    if (quote != '') {
+      registerQuote()
+    }
+  }, [quote, quoteAuthor, quoteTag, registerQuote])
 
   return (
     <div className="flex flex-row items-center">

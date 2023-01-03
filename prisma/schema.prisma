@@ -21,11 +21,20 @@ model Subscription {
   subscriptionId    String  @id @default("email")
   users User[]
 }
+model Quote {
+  id            String      @default(cuid()) @id
+  quote         String      @unique
+  quoteAuthor   String?
+  quoteTag      String?
+  registeredAt  DateTime    @default(now()) @map(name: "registered_at")
+  users User[]
+}
 model User {
   id                String        @default(cuid()) @id
   email             String?       @unique
   phone             String?       @unique
   subscribedAt      DateTime      @default(now()) @map(name: "subscribed_at")  
   subscriptions     Subscription[]
+  saved_quotes      Quote[]
   // TODO: add a subscription interval data field
 }

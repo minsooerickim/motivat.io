@@ -9,4 +9,4 @@ jobs:
       - name: install prettier
         run: yarn add prettier
       - name: Run prettier
-        run: yarn prettier --config .prettierrc.json  --check "components/**/*.{js,jsx,ts,tsx}" "pages/**/*.{js,jsx,ts,tsx}"
+        run: yarn prettier --config .prettierrc  --check "components/**/*.{js,jsx,ts,tsx}" "pages/**/*.{js,jsx,ts,tsx}"

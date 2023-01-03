@@ -6,7 +6,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "format": "yarn prettier --config prettierrc.json  --write \"components/**/*.{js,jsx,ts,tsx}\" \"pages/**/*.{js,jsx,ts,tsx}\"",
+    "format": "yarn prettier --config .prettierrc  --write \"components/**/*.{js,jsx,ts,tsx}\" \"pages/**/*.{js,jsx,ts,tsx}\"",
     "pre-commit": "lint-staged"
   },
   "keywords": [],
