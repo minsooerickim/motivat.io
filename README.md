@@ -52,3 +52,7 @@ Hey I'm Minsoo! I'm a software engineer based in California. I like to weightlif
 ### 💅🏽 Design
 
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
+
+## Entity Relationship Diagram
+
+![umlDiagram](./prisma/ERD.svg)
