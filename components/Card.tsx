@@ -7,23 +7,17 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 
 export default function Card() {
+  const [saved, setSaved] = React.useState(false)
   const [quote, setQuote] = React.useState('')
   const [quoteAuthor, setQuoteAuthor] = React.useState('')
   const [quoteTag, setQuoteTag] = React.useState('')
-  const [saved, setSaved] = React.useState(false)
 
-  // GETs the quote and sets the according properties
-  const getQuote = async () => {
-    await axios
-      .get('https://api.quotable.io/random?maxLength=200', GET_CONFIG)
-      .then(function (res) {
-        setQuote(res.data.content)
-        setQuoteAuthor(res.data.author)
-        setQuoteTag(res.data.tags[0])
-      })
-  }
-  const registerQuote = async () => {
-    await axios.post('/api/registerQuote', { quote, quoteAuthor, quoteTag })
+  const retrieveDailyQuote = async () => {
+    await axios.get('/api/getDailyQuote', GET_CONFIG).then(function (res) {
+      setQuote(res.data.dailyQuote[0].quote)
+      setQuoteAuthor(res.data.dailyQuote[0].quoteAuthor)
+      setQuoteTag(res.data.dailyQuote[0].quoteTag)
+    })
   }
 
   const playQuote = () => {
@@ -51,14 +45,8 @@ export default function Card() {
 
   // get quote on page load
   React.useEffect(() => {
-    getQuote()
+    retrieveDailyQuote()
   }, [])
-
-  React.useEffect(() => {
-    if (quote != '') {
-      registerQuote()
-    }
-  }, [quote, quoteAuthor, quoteTag, registerQuote])
 
   return (
     <div className="flex flex-row items-center">
