@@ -6,15 +6,18 @@ import { ThemeProvider } from 'next-themes'
 import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
 import Navbar from '@/components/Navbar'
+import { SessionProvider } from 'next-auth/react'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <ThemeProvider forcedTheme="dark">
-      <Toaster />
-      <Navbar />
-      <Component {...pageProps} />
-      <Footer />
-    </ThemeProvider>
+    <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
+      <ThemeProvider forcedTheme="dark">
+        <Toaster />
+        <Navbar />
+        <Component {...pageProps} />
+        <Footer />
+      </ThemeProvider>
+    </SessionProvider>
   )
 }
 
