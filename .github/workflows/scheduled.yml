@@ -9,4 +9,4 @@ jobs:
       - name: daily cron job
         run: |
           curl --request POST \
-          --url 'https://motivation-quote-generator.fly.dev/' \
+          --url 'https://motivation-quote-generator.fly.dev/api/getQuote' \
