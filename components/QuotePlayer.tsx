@@ -44,7 +44,7 @@ export default function MediaControlCard() {
   }
 
   const playQuote = () => {
-    var msg = new SpeechSynthesisUtterance()
+    const msg = new SpeechSynthesisUtterance()
 
     // different languages
     // var voices = window.speechSynthesis.getVoices();
