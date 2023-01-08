@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { sendEmail } from '@/lib/sendgrid'
 import { PrismaClient } from '@prisma/client'
 import axios from 'axios'
 
@@ -7,6 +6,7 @@ export default async function manualReviewApplication(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const sgMail = require('@sendgrid/mail')
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
@@ -39,6 +39,7 @@ export default async function manualReviewApplication(
         () => {
           console.log('successfully sent email to ' + subscriber['email'])
         },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (error: { response: { body: any } }) => {
           console.error(error)
           if (error.response) {
