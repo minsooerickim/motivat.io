@@ -1,8 +1,7 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { sendEmail } from '@/lib/sendgrid'
+import { NextApiResponse } from 'next'
 import { PrismaClient } from '@prisma/client'
 
-export default async function manualReviewApplication(res: NextApiResponse) {
+export default async function sendQuotePhone(res: NextApiResponse) {
   const prisma = new PrismaClient()
 
   const emailSubscribers = await prisma.subscription.findUnique({

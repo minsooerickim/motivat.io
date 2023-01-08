@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient } from '@prisma/client'
 import { validateEmail } from '@/utility/methods'
 
-export default async function manualReviewApplication(
+export default async function subscribe(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
